@@ -1,0 +1,210 @@
+FORMAT: 1A
+HOST: http://10.153.196.96:8085
+
+# Forecaster 預測系統 Web API
+
+此API目前提供Model預測資料查詢、各製程點位總表、點位詳細資訊查詢功能
+
+所有傳入的時間變數 格式皆為 '2017-01-01 01:01:01'
+
+# Group Model
+
+預測資料操作 
+
+## 模型預測資料 [/Model/{Model_name}?start={time}&end={time}]
+
++ Parameters
+    + ModelName (required, string) - 模型名稱  
+    + start (required, string) - 起始時間  
+    + end (required, string) - 結束時間  
+
+### 取得該預測模型 [GET]
+
++ Response 200 (application/json)
+
+		[
+			{
+				"time": "2016-01-14 13:00:00",
+				"w_svm": 0.45966917836910337,
+				"mix_D385_diff": 12.61006586454171,
+				"timestamp": 1508837776,
+				"predict": 23.611758952857137,
+				"z_D385_sum": -51.099585534695414,
+				"revise_coef": null,
+				"dqix": -5347.910631925064,
+				"z_TI-D385H_mix_D385_sum": -22.228332914624502,
+				"ma_dist": 2.5026704208830326,
+				"revise_intercept": null,
+				"z_mix": -83.8686962169582,
+				"conf_idx": 1.7927706316189673,
+				"z_mix_D385_diff": -3.51911147277834,
+				"D385_sum": 358.6546777888889,
+				"predict_linear": 23.370321165487958,
+				"TI-D385H_mix_D385_sum": 60001.74543488827,
+				"predict_svm": 23.89556366320293,
+				"mix": 0.8977530808586655,
+				"id": 445,
+				"w_linear": 0.5403308216308966
+			},
+			{
+				"time": "2016-01-14 13:05:00",
+				"w_svm": 0.4594233323628307,
+				"mix_D385_diff": 12.630192780280222,
+				"timestamp": 1508837787,
+				"predict": 23.615278818435446,
+				"z_D385_sum": -51.099585534695414,
+				"revise_coef": null,
+				"dqix": -5347.910631925064,
+				"z_TI-D385H_mix_D385_sum": -22.228332914624502,
+				"ma_dist": 2.5299207902875964,
+				"revise_intercept": null,
+				"z_mix": -83.8686962169582,
+				"conf_idx": 1.8122912451051243,
+				"z_mix_D385_diff": -3.51911147277834,
+				"D385_sum": 358.59812777654315,
+				"predict_linear": 23.376598966795342,
+				"TI-D385H_mix_D385_sum": 59984.02519885041,
+				"predict_svm": 23.89611949356651,
+				"mix": 0.897710065994212,
+				"id": 446,
+				"w_linear": 0.5405766676371693
+			},
+			{
+				"time": "2016-01-14 13:10:00",
+				"w_svm": 0.4592220734152118,
+				"mix_D385_diff": 12.625780831370124,
+				"timestamp": 1508837795,
+				"predict": 23.614244937560798,
+				"z_D385_sum": -51.099585534695414,
+				"revise_coef": null,
+				"dqix": -5347.910631925064,
+				"z_TI-D385H_mix_D385_sum": -22.228332914624502,
+				"ma_dist": 2.531643850938295,
+				"revise_intercept": null,
+				"z_mix": -83.8686962169582,
+				"conf_idx": 1.8135255476745993,
+				"z_mix_D385_diff": -3.51911147277834,
+				"D385_sum": 358.5858742148148,
+				"predict_linear": 23.37648167548452,
+				"TI-D385H_mix_D385_sum": 59978.84570211438,
+				"predict_svm": 23.894233926172394,
+				"mix": 0.8977043651409111,
+				"id": 447,
+				"w_linear": 0.5407779265847881
+			}
+		]
+
+# Group ProcessInfo
+
+取得該製程相關點位資料
+
+## 製程相關點位資料 [/ProcessInfo/{Process}]
+
++ Parameters
+    + Process (required, string) - 製程名稱
+
+### 取得該製程所有點位資料 [GET]
+
++ Response 200 (application/json)
+
+		{
+			"sensor": [
+				{
+					"pv": 39.000164,
+					"tag_num": "TI-J301",
+					"tag_func": "溫度監測",
+					"desc": "WPU、NaOH混合後溫度",
+					"tag_name": "MSAP_TI-J301"
+				},
+				{
+					"pv": 79.8314285,
+					"tag_num": "TI-J302A",
+					"tag_func": "溫度監測",
+					"desc": "1st  AA混合後溫度",
+					"tag_name": "MSAP_TI-J302A"
+				},
+			  
+			],
+			"contrl": [
+				{
+					"pv": 33.3104324,
+					"tag_num": "TIC-E301",
+					"tag_func": "溫度控制",
+					"desc": "WPU、NaOH熱交換後溫度",
+					"tag_name": "MSAP_TIC-E301",
+					"sv": 33,
+					"mv": 1.2,
+					"bias": 0.01
+				},
+				{
+					"pv": 20.8999996,
+					"tag_num": "TIC-E302A",
+					"tag_func": "溫度控制",
+					"desc": "1st  AA熱交換後溫度",
+					"tag_name": "MSAP_TIC-E302A",
+					"sv": 21,
+					"mv": 59.6399994,
+					"bias": 0
+				}
+			]
+		}
+
+#Group Tag
+
+單點點位資料操作
+
+## 單點點位資料 [/Tag/{TagName}?start={time}&end={time}]
+
++ Parameters
+    + TagName (required, string) - 點位名稱  
+    + start (required, string) - 起始時間  
+    + end (required, string) - 結束時間  
+
+### 取得該點位資料 [GET]
+
++ Response 200 (application/json)
+
+		{
+			"series_data": {
+				"MSAP_FIC-J301.MV": [
+					56.2017708,
+					56.2142334,
+					56.2266922,
+					56.239151,
+					56.2516136,
+					56.2640724
+				],
+				"MSAP_FIC-J301.PV": [
+					4673.7001953,
+					4624.7998047,
+					4611.8999023,
+					4611.1000977,
+					4632.7998047,
+					4628.1000977
+				],
+				"MSAP_FIC-J301.SV": [
+					4626,
+					4626,
+					4626,
+					4626,
+					4626,
+					4626
+				],
+				"bias": [
+					0.010311326264591419,
+					-0.0002594455901426513,
+					-0.0030480107436230723,
+					-0.003220904085603041,
+					0.0014699102248162765,
+					0.00045397702118468074
+				]
+			},
+			"stats_info": {
+				"max": 4673.7,
+				"min": 4611.1,
+				"mean": 4630.4,
+				"std": 20.94,
+				"cv": 0
+			},
+			"tag_desc": "NaOH流量"
+		}

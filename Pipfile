@@ -1,0 +1,32 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+"aniso8601" = "==1.3.0"
+certifi = "==2017.11.5"
+click = "==6.7"
+Flask = "==0.12.2"
+Flask-Cors = "==3.0.3"
+Flask-RESTful = "==0.3.6"
+itsdangerous = "==0.24"
+"Jinja2" = "==2.10"
+MarkupSafe = "==1.0"
+numpy = "==1.13.3"
+pandas = "==0.21.1"
+pyodbc = "==4.0.21"
+python-dateutil = "==2.6.1"
+pytz = "==2017.3"
+PyYAML = "==3.12"
+scikit-learn = "==0.19.1"
+scipy = "==1.0.0"
+SQLAlchemy = "==1.1.15"
+Werkzeug = "==0.13"
+
+
+[dev-packages]
+

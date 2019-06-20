@@ -1,0 +1,75 @@
+# e.g.
+# ---
+# - ML_EVA_MI:
+#    data_filepath: data/xxx.csv
+#    model_filepath: model/xxx.xxx
+#    stats_filepath: stats/xxx.csv
+#    cov_filepath: cov/xxx.csv
+---
+general:
+    plant_name: '台塑化-CDU1'
+    event_unit: CDU1        
+
+web_api_setting:
+    host: 10.153.196.96
+    port: 80
+    docker_port: 20001
+
+lims_setting:
+    history_linked_server: LIMS_MLSAP_HISTORY
+    history_view: lims.samp_test_result_sap
+
+sql_connect:
+    rtpms: mssql+pyodbc://sa:`1qaz2wsx@10.153.196.180:1433/master?driver=MSSQL
+    lims: mssql+pyodbc://sa:`1qaz2wsx@10.110.196.60:1433/master?driver=MSSQL
+    fpc_ft: mssql+pyodbc://sa:`1qaz2wsx@10.153.196.59:1433/teller_test?driver=MSSQL
+
+predict_items:
+    sap_d392_tea:
+        device: "D392 茶袋保持力"
+        note: "模型註解"
+        data_name: sap_d392_tea.csv
+        data_target: d392_tea    
+        algo_name: [linear.sav, svm.sav]
+        algo_r2: [0.9, 0.9]
+        algo_dir_path: models/sap_d392_tea/
+        data_dir_path: data/sap_d392_tea/
+        prep_dir_path: prep/sap_d392_tea/    
+        prep_name: [scaler.sav]
+        confidence: True
+        confidence_bounds: [0.5, 0.7]
+        predict_sleep_seconds: 900
+        revise: False
+        revise_minutes_low: -30 
+        revise_minutes_high: 30
+        revise_sample_times: 2 
+        threshold: 0.1
+        target_source: lims
+        sample_point: [SAP_D392]
+        sample_item: [茶袋保持力]       
+        grade_list: [BC283G, BC283, BC383, BC383G]
+        tags:
+    sap_d392_aap:
+        device: "D392 APP(0.7Psi)"
+        note: "模型註解"
+        data_name: sap_d392_aap.csv
+        data_target: d392_aap
+        algo_name: [linear.sav, svm.sav]
+        algo_r2: [0.9, 0.9]
+        algo_dir_path: models/sap_d392_aap/
+        data_dir_path: data/sap_d392_aap/
+        prep_dir_path: prep/sap_d392_tea/    
+        prep_name: [scaler.sav]
+        confidence: False
+        confidence_bounds: [0.5, 0.7]
+        predict_sleep_seconds: 900
+        revise: False
+        revise_minutes_low: -30 
+        revise_minutes_high: 30
+        revise_sample_times: 2 
+        threshold: 0.1
+        target_source: lims
+        sample_point: [SAP_D392]
+        sample_item: [AAP(0.7Psi)]     
+        grade_list: [BC283G, BC283, BC383, BC383G]
+        tags:
